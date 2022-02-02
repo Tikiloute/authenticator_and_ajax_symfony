@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur la page de création de compte</h1>
+    <br>
+
+{{ form_start(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.userName) }}
+    {{ form_row(form.password) }}
+    <input type="submit" value="Valider">
+{{ form_end(form) }}
+{% endblock %}

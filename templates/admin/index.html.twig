@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur la page d'accueil</h1>
+    <br>
+    <a href="{{path('app_create_account')}}">Créer votre compte</a>
+    <a href="{{path('app_login')}}">Se connecter à votre compte</a>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminAlimentController!{% endblock %}
+
+{% block monTitre %}Bienvenu sur la page de modification de : {{aliment.nom}}{% endblock %}
+
+{% block body %}
+
+    {{form_start(form)}}
+            <img src="{{asset('images/' ~ aliment.image)}}" width="150px" alt="">
+            {{form_row(form.nom, {"attr": {"class" : 'text-success'}})}}
+            {{form_row(form.image)}}
+            {{form_widget(form)}}
+            <input type="submit" value="enregistrer">
+    {{form_end(form)}}
+
+{% endblock %}

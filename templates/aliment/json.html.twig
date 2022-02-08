@@ -1,0 +1,49 @@
+
+{% if isCalorie %}
+    <a href="{{path('aliments')}}" class="ms-4 btn btn-primary">Voir l'ensemble des aliments</a>
+{% else %}
+    <a href="{{path('alimentsCalories',{'calorie':46})}}" class="ms-4 btn btn-primary">Voir les aliments qui ont moins de 50 calories</a>
+    <a href="{{path('alimentsGlucide',{'glucide':5})}}" class="ms-4 btn btn-primary">Voir les aliments qui ont moins de 5 glucides</a>
+{% endif %}
+    <div class="container col-12 m-auto">
+        <div class="row">
+    {% for aliment in aliments %}
+        <div class="card m-auto mt-5" style="width: 18rem;">
+            <img src="{{asset('images/' ~ aliment.image)}}" class="card-img-top m-1 styleImages" alt="pas le bon chemin apparement...">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{aliment.nom}}</h5>
+                <hr>
+                <h6 class="bg-primary text-center text-white">Propriété   Valeur(100g)</h6>
+                <ul class="text-left ms-5">
+                    <li>calorie: {{aliment.calorie}}</li>
+                    <li>Protéine: {{aliment.proteine}}</li>
+                    <li>Glucide: {{aliment.glucide}}</li>
+                    <li>Lipides: {{aliment.lipide}}</li>
+                </ul>
+                <div class="d-flex flex-column m-auto">
+                    <a href="{{path('show_aliment', {"id" : aliment.id })}}" class="btn btn-primary col-8 m-auto mb-2">En savoir plus </a>
+                    <span class="text-center"># {{aliment.category}}</span>
+        {% if is_granted("ROLE_USER") %}
+            {% if app.user and aliment.isLikeByUser(app.user) %}
+                <a href="{{path('aliments_like', {'id' : aliment.id})}}" class="text-decoration-none text-center mt-3 js-like">
+                    <img src="{{asset('images/pouce_noir.png')}}" class="me-2 ms-2 js-img" width='25px' alt="">
+                    <span class="text-decoration-none js-likes">{{aliment.likes | length}}</span>
+                    <p class="ms-2 js-p-like"> Je n'aime plus ?</p>
+                </a>             
+            {% else %}
+                <a href="{{path('aliments_like', {'id' : aliment.id})}}" class="text-decoration-none text-center mt-3 js-like">
+                    <img src="{{asset('images/pouce_blanc.png')}}" class="me-2 ms-2 js-img" width='25px' alt="">
+                    <span class="text-decoration-none js-likes me-2">{{aliment.likes | length}}</span>
+                    <p class="ms-2 js-p-like"> J'aime !</p> 
+                </a>
+             {% endif %}
+        {% endif %}  
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+        </div>
+    </div>
+{% block javascripts %}
+    <script src="{{asset('js/filters.js')}}"></script>
+{% endblock %}

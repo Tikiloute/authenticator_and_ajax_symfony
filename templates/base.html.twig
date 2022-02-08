@@ -4,16 +4,50 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+       
     </head>
+        <nav class="navbar navbar-expand-lg navbar-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Aliments.com</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{path('aliments')}}">Aliments</a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{path('admin_aliment')}}">Admin aliments </a>
+                    {% endif %}
+                    </li>
+                    {% if app.user %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{path('app_logout')}}">Se déconnecter</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
+                    </li>
+                    
+                    {% endif %}
+                </ul>
+                </div>
+                <form class="d-flex" action="{{path('search')}}" method="GET">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Recherchez" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Recherchez</button>
+                </form>
+            </div>
+        </nav>
     <body>
-        {% block body %}{% endblock %}
+        <h1 class="rounded bg-primary text-white text-center mt-3">{% block monTitre %}{% endblock %}</h1>
+        {% block body %}        
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

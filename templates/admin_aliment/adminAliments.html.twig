@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminAlimentController!{% endblock %}
+
+{% block monTitre %}Bienvenu sur la page de modification des aliments{% endblock %}
+
+{% block body %}
+<a href="{{path('admin_aliment_create')}}" class="btn btn-secondary ms-4  mt-5">Créer </a>
+<div class="container col-12 m-auto">
+        <div class="row">
+    {% for aliment in aliments %}
+        <div class="card m-auto mt-5" style="width: 18rem;">
+            <img src="{{asset('images/' ~ aliment.image)}}" class="card-img-top m-1 styleImages" alt="pas le bon chemin apparement...">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{aliment.nom}}</h5>
+                <hr>
+                <h6 class="bg-primary text-center text-white">Propriété   Valeur(100g)</h6>
+                <ul class="text-left ms-5">
+                    <li>calorie: {{aliment.calorie}}</li>
+                    <li>Protéine: {{aliment.proteine}}</li>
+                    <li>Glucide: {{aliment.glucide}}</li>
+                    <li>Lipides: {{aliment.lipide}}</li>
+                </ul>
+            <div class="m-auto d-flex flex-column">
+                <a href="{{path('admin_aliment_modify', {"id" : aliment.id } )}}" class="btn btn-dark col-8 mb-2">Modifier </a>
+                <form method="POST" action="{{path('admin_aliment_delete', {'id' : aliment.id })}}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ aliment.id)}}">
+                    <input type="submit" class="btn btn-danger text-center" value="Supprimer">
+                </form>
+            </div>
+        </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}

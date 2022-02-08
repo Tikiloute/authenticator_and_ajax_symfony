@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de votre recherche :{% endblock %}
+
+{% block monTitre %}Bienvenu sur la page de résultat de votre recherche{% endblock %}
+
+{% block body %}
+{% if aliments is empty %}
+    <h2 class="text-danger text-center">Aucun résultat ne correspond à votre recherche</h2>
+{% else %}
+    {% for aliment in aliments %}
+        <div class="card col-12 m-auto mt-5" style="width: 18rem;">
+            <img src="{{asset('images/' ~ aliment.image)}}" class="card-img-top m-1 styleImages" alt="pas le bon chemin apparement...">
+            <div class="card-body text-center">
+                <h5 class="card-title text-center">{{aliment.nom}}</h5>
+                <hr>
+                <h6 class="bg-primary text-white">Propriété   Valeur(100g)</h6>
+                <ul class="">
+                    <li>calorie: {{aliment.calorie}}</li>
+                    <li>Protéine: {{aliment.proteine}}</li>
+                    <li>Glucide: {{aliment.glucide}}</li>
+                    <li>Lipides: {{aliment.lipide}}</li>
+                </ul>
+                <a href="{{path('show_aliment', {"id" : aliment.id } )}}" class="btn btn-primary col-8">En savoir plus </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+  
+{% block monTitre %}
+    {% if isCalorie is same as true %}
+        Liste des aliments contenant moins de 50 calories
+    {% else %}
+       Liste des aliments
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+ <div class="m-auto d-flex">
+        <form action="" class="m-auto d-flex" id="filters">
+        <div class="d-flex flex-column">
+            <h2>Sélectionner le type que vous voulez afficher</h2>
+                <div class="m-auto">
+                    <input class="me-1" type="checkbox" id="legume" name="category[]" value='legume' checked>
+                    <label class="me-3" for='legume'> Légume</label><br>
+                    <input class="me-1" type="checkbox" id='fruit' name="category[]" value='fruit' checked>
+                    <label class="me-3" for='fruit' > Fruit</label><br>
+                </div>
+        </div>
+        </form>
+    </div>
+<div id='contents'>
+    {% include "aliment/json.html.twig" %}
+</div>
+{% endblock %}
+

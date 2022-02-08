@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de compte{% endblock %}
+
+{% block monTitre %}Bienvenu sur la page de création de compte{% endblock %}
+
+{% block body %}
+<div class="col-6 text-center mt-4 m-auto">
+<h1 class="mb-4">Création de votre compte</h1>
+    {{form_start(form)}}
+            {{form_row(form.email, {'label': 'Votre email'})}}
+            {{form_row(form.password, {'label': 'Votre mot de passe'})}}
+             <button class="btn btn-lg btn-primary mt-3 ms-3" type="submit">
+                Créez votre compte
+            </button>
+    {{form_end(form)}}
+</div>
+{% endblock %}

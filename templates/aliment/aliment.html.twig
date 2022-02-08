@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+  
+{% block monTitre %}
+    Bien venu sur la page de {{aliment.nom}}
+{% endblock %}
+
+{% block body %}
+
+<div class="d-flex">
+    <div class="card col-12 m-auto mt-5" style="width: 18rem;">
+        <img src="{{asset('images/' ~ aliment.image)}}" class="card-img-top m-1 styleImages" alt="pas le bon chemin apparement...">
+        <div class="card-body text-center">
+            <h5 class="card-title text-center">{{aliment.nom}}</h5>
+            <hr>
+            <h6 class="bg-primary text-white">Propriété   Valeur(100g)</h6>
+            <ul class="">
+                <li>calorie: {{aliment.calorie}}</li>
+                <li>Protéine: {{aliment.proteine}}</li>
+                <li>Glucide: {{aliment.glucide}}</li>
+                <li>Lipides: {{aliment.lipide}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
